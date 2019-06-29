@@ -43,3 +43,13 @@ Route::get('/cardapio', 'PagesController@cardapio');//aqui chama o controller qu
 Route::get('/faleconosco', 'PagesController@faleconosco');//aqui chama o controller que vai chamar a view do fale conosco
 Route::get('/conta', 'PagesController@conta');//aqui chama o controller que vai chamar a view do fale conosco
 Route::get('/carrinho', 'PagesController@carrinho');//aqui chama o controller que vai chamar a view do fale conosco
+
+
+Route::resource('endereco', 'EnderecoController');
+Route::resource('ingrediente', 'IngredienteController');
+Route::resource('pedido', 'PedidoController');
+Route::resource('pessoa', 'PessoaController');
+Route::resource('produto', 'ProdutoController');
+Route::resource('statusPedido', 'statusPedidoController');
+Route::resource('tiposAtores', 'tiposAtoresController');
+Route::resource('usuario', 'UsuarioController');
