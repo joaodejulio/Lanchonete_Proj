@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Endereco;
 
 class EnderecoController extends Controller
 {
@@ -13,7 +14,11 @@ class EnderecoController extends Controller
      */
     public function index()
     {
-        //
+        $enderecos= Endereco::orderBy('cidade')->get();
+        return view('pages.endereco.index', compact(['enderecos']));
+        // $enderecos= Endereco::all();
+        // return view('pages.endereco.index')->with('endereco', $enderecos);
+        
     }
 
     /**
