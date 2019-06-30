@@ -37,9 +37,16 @@ Route::get('/users/{id}', function ($id) {
 });
 --------------------------------------------------------------------------
 */
+Auth::routes();
 
 Route::get('/', 'PagesController@index');//aqui chama o controller que vai chamar a view da pagina principal
-Route::get('/cardapio', 'PagesController@cardapio');//aqui chama o controller que vai chamar a view do cardapio
-Route::get('/faleconosco', 'PagesController@faleconosco');//aqui chama o controller que vai chamar a view do fale conosco
-Route::get('/conta', 'PagesController@conta');//aqui chama o controller que vai chamar a view do fale conosco
-Route::get('/carrinho', 'PagesController@carrinho');//aqui chama o controller que vai chamar a view do fale conosco
+Route::get('/cardapio', 'cardapioController@Index');//aqui chama o controller que vai chamar a view do cardapio
+Route::get('/atualizatabelapedidos/{id}', 'pedidoController@atualizatabela');//aqui chama o controller que vai chamar a view do cardapio
+Route::get('/pedido', 'pedidoController@Index');//aqui chama o controller que vai chamar a view do cardapio
+Route::get('/atualizaStatus', 'pedidoController@atualizaStatus');//aqui chama o controller que vai chamar a view do cardapio
+Route::resource('caixa', 'caixaController');//aqui chama o controller que vai chamar a view do caixa
+
+
+
+
+Route::get('/home', 'HomeController@index')->name('home');
