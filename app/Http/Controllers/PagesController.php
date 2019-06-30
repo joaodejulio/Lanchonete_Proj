@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     public function index(){
+        echo 'teste';
         return view('pages.index');
     }
     public function cardapio(){

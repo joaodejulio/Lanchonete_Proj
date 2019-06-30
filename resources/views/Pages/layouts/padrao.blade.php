@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ config('app.name'), '2' }}</title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <meta name="author" content="Rafael G., João Pedro, Renan F.">
     <meta name="description" content="Faça seu pedido online! Horário de funcionamento: Terça à Domingo, 17h30 à 00h00">
 
@@ -23,10 +23,11 @@
     
     <!-- Theme color -->
     <link id="switcher" href="{{asset('css/cores.css')}}" rel="stylesheet">    
-
-    
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 </head>
     <body>
 
@@ -47,13 +48,10 @@
                     <a class="nav-link" href="/cardapio">Cardápio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/faleconosco">Fale Conosco</a>
+                    <a class="nav-link" href="/caixa">Caixa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/conta">Sua Conta</a>
-                </li>    
-                <li class="nav-item">
-                    <a class="nav-link" href="/carrinho">Pedido</a>
+                    <a class="nav-link" href="/pedido">Pedido</a>
                 </li>    
                 </ul>
             </div>  
