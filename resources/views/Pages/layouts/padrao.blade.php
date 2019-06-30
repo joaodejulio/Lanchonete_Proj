@@ -92,7 +92,7 @@
                     <a href="mailto:renanfrancisco.on@gmail.com">João Pedro</a>,
                     <a href="mailto:renanfrancisco.on@gmail.com">Erick</a> e
                     <a href="mailto:renanfrancisco.on@gmail.com">Renan</a>.<br>
-                    &copy; Copyright 2018.<a rel="nofollow" href="javascript:void(0)"> Políticas de Privacidade</a>.<br>
+                    &copy; Copyright 2018.<a rel="nofollow" href="/politicasprivacidade"> Políticas de Privacidade</a>.<br>
                     </small></p>          
                 </div>         
             </div>
