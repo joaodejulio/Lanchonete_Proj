@@ -28,7 +28,8 @@ class EnderecoController extends Controller
      */
     public function create()
     {
-        //
+        $endereco = new Endereco();
+        return view('pages.endereco.create', compact(['endereco']));
     }
 
     /**
@@ -39,51 +40,97 @@ class EnderecoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $e = new Endereco();
+            $e->cidade = $request->cidade;
+            $e->estado = $request->estado;
+            $c->saveOrFail();
+
+            session()->flash('success-message', 'Endereço cadastrado.');
+            return redirect()->route('pages.endereco.index');
+        }catch(\Exception $e ){
+            session()->flash('error-message', 'Não foi possivel inserir endereço.');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Endereco $endereco
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_endereco)
     {
-        //
+        try{
+            $endereco = Endereco::findOrFail($id_endereco);
+            return view('pages.endereco.show', compact(['endereco']));
+        }catch(\Exception $e){
+            session()->flash('error-message', 'Não foi possivel localizar endereços cadastrados');
+            return redirect()->route('pages.endereco.index');
+        }
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Endereco $endereco
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+    public function edit($id_endereco){
+        try{
+            $endereco = Endereco::findOrFail($id_endereco);
+            return view('pages.endereco.edit', compact(['endereco']));
+        }catch(\Exception $e){
+            session()->flash('error-message', 'Não foi possivel localizar o endereco solicitado');
+            return redirect()->route('pages.endereco.index');
 
+        }
+
+    }
+// @param  int  $id
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_endereco)
     {
-        //
-    }
+        try{
+            $endereco = Endereco::findOrFail($id_endereco);
+            $endereco->cidade = $request->cidade;
+            $endereco->estado = $request->estado;
+            $endereco->cep = $request->cep;
 
+            session()->flash('success-message', 'Dados da cidade atualizados');
+            return redirect()->route('pages.endereco.index');    
+        }catch(\Exception $e){
+            $request->session()->flash('error-message','Não foi possivel alterar os dados da cidade');
+            return redirect()->back()->withInput();
+        }
+
+    }
+// @param  int  $id
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Endereco $endereco
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_endereco)
     {
-        //
+        try{
+            $endereco = Endereco::findOrFail($id_endereco);
+            $endereco->delete();
+
+            $request->session()->flash('success-message', 'Endereco removido com sucesso.');
+            return redirect()->route('pages.endereco.index');
+        }catch(\Exception $e){
+            $request->session()->flash('error-message', 'Não foi posivel removel cidade');
+            return redirect()->route('pages.endereco.index');
+        }
     }
 }

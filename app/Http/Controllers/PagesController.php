@@ -21,4 +21,7 @@ class PagesController extends Controller
     public function carrinho(){
         return view('pages.carrinho');
     }
+    public function politicas(){
+        return view('pages.politicasprivacidade');
+    }
 }
