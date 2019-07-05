@@ -1,16 +1,23 @@
 @extends('pages.layouts.padrao')
 @section('content')
-<h1>Pedido</h1>
+<h1>Caixa</h1>
     <div class="container">
       <form method="post" action="{{url('caixa')}}">
    	<div class="row">
       @csrf
      <div class="col-md-6">
-
-     <input  type="hidden" id="id_usuario" name="id_usuario" value="{{$usuarios}}">
-       
-       <label>Quantidade do produto</label>
-       <input class="form-control" type="text" id="quantidade_produto" name="quantidade_produto">
+       <label>Usuario</label>
+       <select class="form-control" name = "usuario">
+        @foreach($usuarios as $usuario)
+        @php
+        @endphp
+        <option value="{{$usuario['id']}}">
+         <span>{{$usuario['email']}}</span>
+        </option>
+        @endforeach
+       </select>
+      <label>Quantidade do produto</label>
+      <input class="form-control" type="text" id="quantidade_produto" name="quantidade_produto">
       <label>Produto</label>
        <select class="form-control" id="produto" name ="produto">
         @foreach($produtos as $produto)

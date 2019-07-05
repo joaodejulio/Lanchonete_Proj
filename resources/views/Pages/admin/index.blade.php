@@ -1,4 +1,4 @@
-@extends('pages.layouts.padrao')
+@extends('pages.admin.padrao')
 
   @section('content')
      
@@ -7,8 +7,9 @@
           <div class="carousel-item active">
             <img src="{{asset('images/1.png')}}" alt="carrousel index" width="1350" height="520">
             <div class="carousel-caption">
-              <h1 class="font-weight-bold text-warning" >Lanchonete X-Tudo!</h1>
-              <span class="text-warning">Faça seu pedido pelo telefone 9988898!</span>
+              <span>Bem vindo à</span>
+              <h1 class="font-weight-bold text-warning" >Bem Vindo Administrador!</h1>
+              
             </div>   
           </div>
         </div>

@@ -1,14 +1,14 @@
 <?php
 
 namespace App;
-
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use Notifiable;
+    
+    protected $table = 'admin';
 
     /**
      * The attributes that are mass assignable.
@@ -37,7 +37,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function getAll(){
-        $user = self::all();
-        return $user;
+        $admin = self::all();
+        return $admin;
     }
 }

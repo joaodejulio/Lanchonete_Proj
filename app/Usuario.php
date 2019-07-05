@@ -6,8 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuario extends Model
 {
-    protected $table = 'usuarios';
-    protected $primaryKey = 'id_usuario';
-    protected $fillable = ['id_pessoa','id_ator', 'login', 'senha'];
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+    protected $fillable = ['email','password'];
     public $timestamps = true;
+
+
+    public function getAll(){
+        $user = self::all();
+        return $user;
+    }
 }

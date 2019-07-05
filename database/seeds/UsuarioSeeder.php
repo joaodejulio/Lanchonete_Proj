@@ -11,25 +11,19 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('usuarios')->insert([
-            'id_pessoa' => 3,
-            'id_ator' => 1,
-            'login' =>  'admin',
-            'senha' => 'admin'
+        DB::table('users')->insert([
+            'email' =>  'admin@xtudo',
+            'password' => 'admin'
         ]);
         
-        DB::table('usuarios')->insert([
-            'id_pessoa' => 4,
-            'id_ator' => 2,
-            'login' =>  'cliente',
-            'senha' => 'cliente'
+        DB::table('users')->insert([
+            'email' =>  'cliente@xtudo',
+            'password' => 'cliente'
         ]);
 
-        DB::table('usuarios')->insert([
-            'id_pessoa' => 5,
-            'id_ator' => 3,
-            'login' =>  'cozinheiro',
-            'senha' => 'cozinheiro'
+        DB::table('users')->insert([
+            'email' =>  'cozinheiro@xtudo',
+            'password' => 'cozinheiro'
         ]);
     }
 }

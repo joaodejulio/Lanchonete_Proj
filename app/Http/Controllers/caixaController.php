@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\User;
 use App\Models\Pedido;
 use App\Models\Produto;
-use App\User;
+use Illuminate\Http\Request;
 use App\Models\Pedidoproduto;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+
+
 
 class caixaController extends Controller
 {
@@ -22,17 +26,25 @@ class caixaController extends Controller
     }
     public function index(){
     	$produtos = $this->produto->getAll();
-    	$users = $this->user->getAll();
-        return view('pages.caixa',compact('produtos','users'));
+        if(Auth::user()){
+            $usuarios = DB::table('users')
+            ->where('id', '=', Auth::user()->id)
+            ->select('id','email') 
+            ->get();
+            return view('pages.caixa',compact('produtos','usuarios'));
+
+        }else{return redirect('/login');}
     }
     public function store()
     {
     	$input=Input::all();
-    	$pedido = array('id_user' => $input['usuario'],'valor_total' => $input['valor_total'],  'status' => 0 );
-       	$pedido_retorno = $this->pedido->savePedido($pedido);
-       	$pedido_materiais;
+    	$pedido = array('id_pedido' => NULL ,'id_usuario' => Auth::user()->id,'valor_total' => $input['valor_total'],  'status' => 1, 'created_at'=>NULL, 'updated_at'=>NULL);
+           
+        $pedido_retorno = $this->pedido->savePedido($pedido);
+           
+           $pedido_materiais;
        	foreach ($input['produto_id'] as $key => $value) {
-       		$pedido_materiais=array('id_pedido' => $pedido_retorno['id_pedido'], 'quantidade_produto' => $input['quantidade'][$key],'id_produto' => $value);
+       		$pedido_materiais=array('id_pedido' => $pedido_retorno['id_pedido'], 'quantidade' => $input['quantidade'][$key],'id_produto' => $value);
        		 $this->pedidoproduto->savePedidoproduto($pedido_materiais);
 
        	}

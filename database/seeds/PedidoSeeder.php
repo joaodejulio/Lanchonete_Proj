@@ -12,12 +12,14 @@ class PedidoSeeder extends Seeder
     public function run()
     {
         DB::table('pedidos')->insert([
-            'id_status_pedido' =>2,
-            'valor_pago' =>8.5,
-            'valor_total' => 8.5,
-            'pago'=> true,
             'id_usuario' => 2,
-            'id_produto' => 1 
+            'valor_total' => 8.5,
+            'status' =>2,
+        ]);
+        DB::table('pedidos')->insert([
+            'id_usuario' => 2,
+            'valor_total' => 25.0,
+            'status' => 4
         ]);
     }
 }

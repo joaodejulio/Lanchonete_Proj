@@ -2,24 +2,68 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Pedido;
+use Illuminate\Http\Request;
 use App\Models\Pedidoproduto;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 
 class pedidoController extends Controller
 {
-	public function index(){
-        return view('pages.pedido');
+	protected $pedido = null, $pedidoproduto = null;
+	
+	public function __construct(Pedido $pedido, Pedidoproduto $pedidoproduto){
+		$this->pedido=$pedido;
+		$this->pedidoproduto=$pedidoproduto;
+	}
+	
+	public function show($id)
+    {
+		try{
+			// $pedidos= Pedido::findOrFail($id);
+			$pedidos = DB::table('pedidos')
+				  ->join('pedido_produto', 'pedido_produto.id_pedido', '=','pedidos.id_pedido')
+				  ->join('users', 'pedidos.id_usuario', '=','users.id')
+				  ->join('produtos', 'pedido_produto.id_produto', '=', 'produtos.id_produto')
+				  ->where('id_usuario', '=', 5)
+				  ->select('pedidos.id_pedido','status', 'users.email', 'users.id', 'pedidos.valor_total', 'pedido_produto.id_produto', 'pedido_produto.quantidade', 'produtos.nome', 'produtos.quantidade', 'produtos.valor') 
+				  ->get();
+            return view('pages.admin.showpedido', compact(['pedidos']));
+        }catch(\Exception $e){
+            session()->flash('error-message', 'Não foi possivel localizar produtos cadastrados');
+            return redirect()->route('pages.admin.pedidocontrole');
+        }
     }
 
-    protected $pedido = null, $pedidoproduto = null;
-    
-    public function __construct(Pedido $pedido, Pedidoproduto $pedidoproduto){
-        $this->pedido=$pedido;
-        $this->pedidoproduto=$pedidoproduto;
-    }
+	public function index(){
+		// $pedidos= Pedido::orderBy('id_pedido')->get();
+		$pedidos = DB::table('pedidos')
+				  ->join('pedido_produto', 'pedido_produto.id_pedido', '=','pedidos.id_pedido')
+				  ->join('users', 'pedidos.id_usuario', '=','users.id')
+				  ->join('produtos', 'pedido_produto.id_produto', '=', 'produtos.id_produto')
+				  ->where('id_usuario', '>', 0)
+				  ->select('pedidos.id_pedido','status', 'users.email', 'users.id', 'pedido_produto.id_produto', 'pedido_produto.quantidade', 'produtos.nome', 'produtos.quantidade', 'produtos.valor') 
+				  ->get();
+				  
+        return view('pages.admin.pedidocontrole', compact(['pedidos']));
+	
+	
+	}
+	public function meuspedidos(){
+		$pedidos = DB::table('pedidos')
+				  ->join('pedido_produto', 'pedido_produto.id_pedido', '=','pedidos.id_pedido')
+				  ->join('users', 'pedidos.id_usuario', '=','users.id')
+				  ->join('produtos', 'pedido_produto.id_produto', '=', 'produtos.id_produto')
+				  ->where('id_usuario', '>', Auth::user()->id)
+				  ->select('pedidos.id_pedido','status', 'users.email', 'users.id', 'pedido_produto.id_produto', 'pedido_produto.quantidade', 'produtos.nome', 'produtos.quantidade', 'produtos.valor') 
+				  ->get();
+				  
+        return view('pages.admin.pedidocontrole', compact(['pedidos']));
+
+	}
+
 
     public function atualizatabela($status){
     	$pedido = $this->pedido->getPedidobystatus($status);

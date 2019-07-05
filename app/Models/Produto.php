@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produto extends Model
 {
-    protected $table = 'produto';
+    protected $table = 'produtos';
 
     const CREATED_AT 		= 'data_adicionado';
 	const UPDATED_AT 		= 'data_atualizado';
     protected $primaryKey  	= 'id_produto';
 
     protected $fillable = [
-        'nome','valor'
+        'nome','valor', 'quantidade', 'descricao'
     ];
 
     public function getAll(){

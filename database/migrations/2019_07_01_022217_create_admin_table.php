@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTiposAtorTable extends Migration
+class CreateAdminTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateTiposAtorTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipos_ator', function (Blueprint $table) {
-            $table->bigIncrements('id_tipo_ator');
-            $table->string('descricao');
+        Schema::create('admin', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
+            
         });
     }
 
@@ -27,6 +31,6 @@ class CreateTiposAtorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipos_ator');
+        Schema::dropIfExists('users');
     }
 }

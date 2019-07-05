@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
-	protected $table = 'pedido';
+	protected $table = 'pedidos';
 
     protected $primaryKey  	= 'id_pedido';
 
     protected $fillable = [
-        'id_user','valor_total','status'
+        'id_usuario','valor_total','status'
     ];
     public $timestamps = false;
     public function getAll(){
@@ -52,7 +52,15 @@ class Pedido extends Model
 
     }
     public function getPedidobystatus($status){
-        $query = self::where('status','=',$status)->join('users as u', 'u.id','=','pedido.id_user')->select('id_pedido','u.name','status')->get();
+        $query = self::where('status','=',$status)->join('usuarios as u', 'u.id','=','pedido.id_usuario')->select('id_pedido','u.name','status')->get();
         return $query;
     }
+
+    public function pedidoProduto(){
+        return $this->hasMany('App\Models\Pedidoproduto')
+                              ->select(\DB::raw('id_produto, sum(valor) as valor'))  
+                              ->groupBy('id_produto')
+                              ->orderBy('id_produto', 'desc');
+    }
+    
 }

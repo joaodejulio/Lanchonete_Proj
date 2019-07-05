@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     public function index(){
-        echo 'teste';
+        // echo 'teste';
         return view('pages.index');
     }
     public function cardapio(){
@@ -25,4 +25,5 @@ class PagesController extends Controller
     public function politicas(){
         return view('pages.politicasprivacidade');
     }
+    
 }

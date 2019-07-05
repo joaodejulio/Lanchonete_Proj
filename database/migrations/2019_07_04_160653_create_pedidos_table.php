@@ -15,29 +15,17 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->bigIncrements('id_pedido');
-            $table->unsignedBigInteger('id_status_pedido');
             $table->unsignedBigInteger('id_usuario');
-            $table->unsignedBigInteger('id_produto');
             $table->float('valor_total');
-            $table->float('valor_pago');
-            $table->boolean('pago');
-            
+            $table->integer('status');
             $table->timestamps();
 
-            $table->foreign('id_status_pedido')
-                  ->references('id_status_pedido')
-                  ->on('status_pedidos')
+            $table->foreign('id_usuario')
+                  ->references('id')
+                  ->on('users')
                   ->onDelete('cascade');
 
-            $table->foreign('id_usuario')
-                  ->references('id_usuario')
-                  ->on('usuarios')
-                  ->onDelete('cascade');
             
-            $table->foreign('id_produto')
-                  ->references('id_produto')
-                  ->on('produtos')
-                  ->onDelete('cascade');
         });
     }
 

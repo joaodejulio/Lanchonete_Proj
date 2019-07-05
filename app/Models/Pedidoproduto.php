@@ -11,7 +11,7 @@ class Pedidoproduto extends Model
     protected $primaryKey  	= 'id_pedido_produto';
 
     protected $fillable = [
-        'id_produto','id_pedido','quantidade_produto'
+        'id_produto','id_pedido','quantidade'
     ];
     public $timestamps = false;
     public function getAll(){
@@ -54,4 +54,10 @@ class Pedidoproduto extends Model
         $query = self::where('id_pedido','=',$pedidoid)->join('produto as p', 'p.id_produto','=','pedido_produto.id_produto')->select('p.nome','p.valor')->get();
         return $query;
     }
+
+    public function produto (){
+        return $this->belongsToMany(Produto::class);
+    }
+
+ 
 }

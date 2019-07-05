@@ -16,15 +16,13 @@ class CreateProdutosTable extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->bigIncrements('id_produto');
             $table->string('nome');
-            $table->unsignedBigInteger('id_ingrediente');
-            
-            $table->float('valor_final');
+            $table->float('valor');
+            $table->integer('quantidade')->default(1);
+            $table->string('descricao');
+            $table->string('img');
             // $table->timestamps();
 
-            $table->foreign('id_ingrediente')
-                  ->references('id_ingrediente')
-                  ->on('ingredientes')
-                  ->onDelete('cascade');
+           
         });
     }
 
