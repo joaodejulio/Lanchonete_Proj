@@ -18,6 +18,8 @@ return [
         'passwords' => 'users',
     ],
 
+    // Auth::guard('admin')->once($credentials)
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -46,6 +48,23 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+            
+        ],
+        'func' => [
+            'driver' => 'session',
+            'provider' => 'func',
+            
+        ],
+        'client' => [
+            'driver' => 'session',
+            'provider' => 'client',
+        ],
+
+        
     ],
 
     /*
@@ -69,6 +88,15 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+        'func' => [
+            'driver' => 'eloquent',
+            'model' => App\Funcionario::class,
         ],
 
         // 'users' => [
@@ -95,6 +123,11 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'admin' => [
+            'provider' => 'admin',
             'table' => 'password_resets',
             'expire' => 60,
         ],
